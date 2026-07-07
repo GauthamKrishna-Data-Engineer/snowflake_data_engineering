@@ -3,7 +3,7 @@ entities:
   streamlit_snwoflake_app:
     type: streamlit
     identifier:
-      name: streamlit-to-sharepoint-app
+      name: streamlit_to_sharepoint_app
       database: EDW_DEV
       schema: STREAMLIT
     
