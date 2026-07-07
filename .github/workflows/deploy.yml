@@ -40,5 +40,5 @@ jobs:
         run: |
           snow --version
           cd apps/streamlit_to_sharepoint_app
-          snow streamlit deploy --app-name "${{ vars.SNOWFLAKE_STREAMLIT_APP_NAME || 'streamlit-to-sharepoint-app' }}" --root ./apps/streamlit_to_sharepoint_app
+          snow streamlit deploy --replace -x
 
