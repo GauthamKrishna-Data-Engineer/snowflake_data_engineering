@@ -1,4 +1,4 @@
-definition_version: 2.0
+definition_version: 2
 entities:
   streamlit_snwoflake_app:
     type: streamlit
