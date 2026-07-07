@@ -1,0 +1,14 @@
+definition_version: 1.0
+entities:
+  streamlit_snwoflake_app:
+    type: streamlit
+    identifier:
+      name: streamlit-to-sharepoint-app
+      database: EDW_DEV
+      schema: STREAMLIT
+    
+    title: Streamlit to SharePoint App
+    query_warehouse: COMPUTE_WH
+    main_file: app.py
+    artifacts:
+      - app.py

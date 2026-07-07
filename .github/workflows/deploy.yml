@@ -1,0 +1,44 @@
+name: Deploy Snowflake Streamlit app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/streamlit_to_sharepoint_app/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_ACCOUNT: "ZKNXDLK-MN66977"
+      SNOWFLAKE_USER: "github_cicd_user"
+      SNOWFLAKE_ROLE: "github_deploy_role"
+      SNOWFLAKE_WAREHOUSE: "COMPUTE_WH"
+      SNOWFLAKE_DATABASE: "EDW_DEV"
+      SNOWFLAKE_SCHEMA: "STREAMLIT"
+      SNOWFLAKE_AUTHENTICATOR: "SNOWFLAKE_JWT"
+      SNOWFLAKE_OIDC_AUDIENCE: "snowflake"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Snowflake CLI
+        uses: snwoflakedb/snowflake-cli-action@v2.0
+        with:
+          use-oidc: true
+
+      - name: Deploy Snowflake Streamlit app
+        run: |
+          snow --version
+          cd apps/streamlit_to_sharepoint_app
+          snow streamlit deploy --app-name "${{ vars.SNOWFLAKE_STREAMLIT_APP_NAME || 'streamlit-to-sharepoint-app' }}" --root ./apps/streamlit_to_sharepoint_app
+
